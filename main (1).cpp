@@ -21,8 +21,8 @@ void pressEnterToContinue() {
 }
 
 void studentRegister(Student* students, int& studentCount) {
-    if (studentCount >= MAX_STUDENTS) {
-        cout << "Maximum number of students reached. Cannot register more students." << endl;
+    if (studentCount >= maxStudCout) {
+        cout << "Maximum number of students reached. Please refer to the admin" << endl;
         pressEnterToContinue();
         return;
     }
@@ -172,7 +172,7 @@ void studentPage() {
 }
 
 int main() {
-    Student students[MAX_STUDENTS];
+    Student students[maxStudcout];
     int studentCount = 0;
 
     int mainChoice;
