@@ -3,7 +3,7 @@
 
 using namespace std;
 
-const int MAX_STUDENTS = 100;  // Maximum number of students
+const int maxStudcout = 1000;  // Maximum number of students
 
 struct Student {
     string name;
