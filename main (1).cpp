@@ -8,21 +8,67 @@ void pressEnterToContinue() {
     cout << "Please press ENTER to proceed...";
     cin.ignore();
     cin.get();
-    system("cls"); // Clears the console screen
+    system("cls"); 
 }
-
+//Function used for admin page
 bool adminLogin() {
     string username, password;
+    string defaultUSer= "sscadmin";
+    string defaultPass= "adminpassword":
     cout << "Admin Login" << endl;
     cout << "Enter Username: ";
     cin >> username;
     cout << "Enter Password: ";
     cin >> password;
-    // Add your logic here to validate the username and password
-    // Return true if the login is successful, false otherwise
-    return true; // Placeholder for successful login
+    if (defaultUser!=username && defaultPass !=password){
+       
+    }
+    else {
+        return true;
+    }
+
 }
 
+
+void adminPage() {
+    int adminChoice;
+
+    do {
+        cout << "=====================" << endl;
+        cout << "ADMIN" << endl;
+        cout << "=====================" << endl;
+        cout << "1. Add Announcement" << endl;
+        cout << "2. Update Announcement" << endl;
+        cout << "3. Delete Announcement" << endl;
+        cout << "4. Search Student Information" << endl;
+        cout << "5. Log Out" << endl;
+        cout << "=====================" << endl;
+        cout << "Enter your choice: ";
+        cin >> adminChoice;
+
+        switch (adminChoice) {
+            case 1:
+                addAnnouncement();
+                break;
+            case 2:
+                updateAnnouncement();
+                break;
+            case 3:
+                deleteAnnouncement();
+                break;
+            case 4:
+                searchStudentInformation();
+                break;
+            case 5:
+                break;
+            default:
+                cout << "Invalid choice. Please try again." << endl;
+        }
+        system("clear"); // Clears the console screen after each choice
+    } while (adminChoice != 5);
+}
+
+//Function Used for Student Page
 bool studentLogin() {
     string username, password;
     cout << "=====================" << endl;
@@ -32,9 +78,8 @@ bool studentLogin() {
     cin >> username;
     cout << "Enter Password: ";
     cin >> password;
-    // Add your logic here to validate the username and password
-    // Return true if the login is successful, false otherwise
-    return true; // Placeholder for successful login
+
+    return true; 
 }
 
 void viewAnnouncements() {
@@ -79,43 +124,6 @@ void studentPage() {
     } while (studentChoice != 3);
 }
 
-void adminPage() {
-    int adminChoice;
-
-    do {
-        cout << "=====================" << endl;
-        cout << "ADMIN" << endl;
-        cout << "=====================" << endl;
-        cout << "1. Add Announcement" << endl;
-        cout << "2. Update Announcement" << endl;
-        cout << "3. Delete Announcement" << endl;
-        cout << "4. Search Student Information" << endl;
-        cout << "5. Log Out" << endl;
-        cout << "=====================" << endl;
-        cout << "Enter your choice: ";
-        cin >> adminChoice;
-
-        switch (adminChoice) {
-            case 1:
-                // addAnnouncement();
-                break;
-            case 2:
-                // updateAnnouncement();
-                break;
-            case 3:
-                // deleteAnnouncement();
-                break;
-            case 4:
-                // searchStudentInformation();
-                break;
-            case 5:
-                break;
-            default:
-                cout << "Invalid choice. Please try again." << endl;
-        }
-        system("clear"); // Clears the console screen after each choice
-    } while (adminChoice != 5);
-}
 void studentRegister() {
     string name, srCode, program, sectionBlock, password;
     cout << "===============================" << endl;
@@ -140,6 +148,9 @@ void studentRegister() {
     cout << "===============================" << endl;
     pressEnterToContinue();
 }
+
+
+//Main FUnction 
 int main() {
     cout << "================================" << endl;
     cout << "Supreme Student Council" << endl;
@@ -168,11 +179,11 @@ int main() {
         switch (mainChoice) {
             case 1:
 
-                if (adminLogin()) {
+                if (adminLogin(true)) {
                     adminPage();
                 } else {
                     cout << "Invalid username or password. Please try again." << endl;
-                    pressEnterToContinue();
+                   adminLogin();
                 }
                 break;
             case 2: 
@@ -191,7 +202,7 @@ int main() {
             default:
                 cout << "Invalid choice. Please try again." << endl;
         }
-        system("clear"); // Clears the console screen after each choice
+        system("clear");
     } while (mainChoice != 4);
 
     return 0;
