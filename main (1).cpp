@@ -29,7 +29,21 @@ bool adminLogin() {
 
 }
 
+void addAnnouncement(){
+//lagay logi dito
+}
 
+void updateAnnouncement(){
+//lagay logi dito
+}
+
+void deleteAnnouncement(){
+//lagay logi dito
+}
+
+void searchStudentInformation(){
+//lagay logi dito
+}
 void adminPage() {
     int adminChoice;
 
@@ -64,7 +78,7 @@ void adminPage() {
             default:
                 cout << "Invalid choice. Please try again." << endl;
         }
-        system("clear"); // Clears the console screen after each choice
+        system("clear"); 
     } while (adminChoice != 5);
 }
 
@@ -82,15 +96,16 @@ bool studentLogin() {
     return true; 
 }
 
+
 void viewAnnouncements() {
     cout << "View Announcements" << endl;
-    // Add your logic here
+    // lagay logic
     pressEnterToContinue();
 }
 
 void sscFeePayment() {
     cout << "SSC Fee Payment" << endl;
-    // Add your logic here
+    // lagay logic
     pressEnterToContinue();
 }
 
@@ -120,7 +135,7 @@ void studentPage() {
             default:
                 cout << "Invalid choice. Please try again." << endl;
         }
-        system("clear"); // Clears the console screen after each choice
+        system("clear"); 
     } while (studentChoice != 3);
 }
 
