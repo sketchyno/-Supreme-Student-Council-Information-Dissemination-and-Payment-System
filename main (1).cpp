@@ -1,13 +1,17 @@
 #include <iostream>
 #include <string>
 
-
 using namespace std;
 
-#include <iostream>
-#include <string>
+const int MAX_STUDENTS = 100;  // Maximum number of students
 
-using namespace std;
+struct Student {
+    string name;
+    string srCode;
+    string program;
+    string sectionBlock;
+    string password;
+};
 
 void pressEnterToContinue() {
     cout << "Please press ENTER to proceed...";
@@ -15,26 +19,38 @@ void pressEnterToContinue() {
     cin.get();
     system("cls");
 }
-void studentRegister() {
-    string name, srCode, program, sectionBlock, password;
 
+void studentRegister(Student* students, int& studentCount) {
+    if (studentCount >= MAX_STUDENTS) {
+        cout << "Maximum number of students reached. Cannot register more students." << endl;
+        pressEnterToContinue();
+        return;
+    }
+
+    cout << "===============================" << endl;
     cout << "Register Student" << endl;
+    cout << "===============================" << endl;
     cout << "Enter Name: ";
     cin.ignore();
-    getline(cin, name);
-    cout << "Enter Sr-Code: ";
-    getline(cin, srCode);
+    getline(cin, students[studentCount].name);
+    cout << "Enter Sr-Code (Username): ";
+    cin >> students[studentCount].srCode;
     cout << "Enter Program: ";
-    getline(cin, program);
+    cin.ignore();
+    getline(cin, students[studentCount].program);
     cout << "Enter Section/Block: ";
-    getline(cin, sectionBlock);
+    getline(cin, students[studentCount].sectionBlock);
     cout << "Enter Password: ";
-    cin >> password;
-    cout << endl;
+    cin >> students[studentCount].password;
 
+    cout << "===============================" << endl;
+    cout << endl;
     cout << "~~ Student Successfully Registered ~~" << endl;
     cout << "Please Click Enter To Exit" << endl;
+    cout << "===============================" << endl;
     pressEnterToContinue();
+
+    studentCount++;
 }
 
 bool adminLogin() {
@@ -79,19 +95,19 @@ void adminPage() {
         switch (adminChoice) {
             case 1:
                 // addAnnouncement();
-                cout << "Add Announcement" << endl;
+                cout << "Add " << endl;
                 break;
             case 2:
                 // updateAnnouncement();
-                cout << "Update Announcement" << endl;
+                cout << "Update " << endl;
                 break;
             case 3:
                 // deleteAnnouncement();
-                cout << "Delete Announcement" << endl;
+                cout << "Delete " << endl;
                 break;
             case 4:
                 // searchStudentInformation();
-                cout << "Search Student Information" << endl;
+                cout << "Search" << endl;
                 break;
             case 5:
                 break;
@@ -103,27 +119,22 @@ void adminPage() {
     } while (adminChoice != 5);
 }
 
-
-bool studentLogin() {
+bool studentLogin(Student* students, int studentCount) {
     string username, password;
-    string studentUsername = "student";
-    string studentPassword = "password";
-
+    cout << "=====================" << endl;
     cout << "Student Login" << endl;
+    cout << "=====================" << endl;
+    cout << "Enter Username (SR Code): ";
+    cin >> username;
+    cout << "Enter Password: ";
+    cin >> password;
 
-    do {
-        cout << "Enter Username: ";
-        cin >> username;
-        cout << "Enter Password: ";
-        cin >> password;
-        cout << endl;
-
-        if (username == studentUsername && password == studentPassword) {
+    for (int i = 0; i < studentCount; i++) {
+        if (students[i].srCode == username && students[i].password == password) {
             return true;
-        } else {
-            cout << "Invalid username or password. Please try again." << endl;
         }
-    } while (true);
+    }
+    return false;
 }
 
 void studentPage() {
@@ -161,6 +172,9 @@ void studentPage() {
 }
 
 int main() {
+    Student students[MAX_STUDENTS];
+    int studentCount = 0;
+
     int mainChoice;
 
     do {
@@ -196,7 +210,7 @@ int main() {
                 }
                 break;
             case 2:
-                if (studentLogin()) {
+                if (studentLogin(students, studentCount)) {
                     studentPage();
                 } else {
                     cout << "Invalid username or password. Please try again." << endl;
@@ -204,7 +218,7 @@ int main() {
                 }
                 break;
             case 3:
-                studentRegister();
+                studentRegister(students, studentCount);
                 break;
             case 4:
                 break;
