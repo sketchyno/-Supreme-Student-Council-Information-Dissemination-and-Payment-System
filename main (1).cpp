@@ -17,10 +17,13 @@ void pressEnterToContinue() {
     cout << "Please press ENTER to proceed...";
     cin.ignore();
     cin.get();
-    system("cls");
+    system("clear");
 }
 
 void studentRegister(Student* students, int& studentCount) {
+    
+    system("clear");
+
     if (studentCount >= maxStudcout) {
         cout << "Maximum number of students reached. Please refer to the admin" << endl;
         pressEnterToContinue();
@@ -54,6 +57,9 @@ void studentRegister(Student* students, int& studentCount) {
 }
 
 bool adminLogin() {
+    
+    system("clear");
+
     string username, password;
     string defaultUsername = "sscadmin";
     string defaultPassword = "adminpassword";
@@ -76,6 +82,9 @@ bool adminLogin() {
 }
 
 void adminPage() {
+
+    system("clear");
+
     int adminChoice;
 
     do {
@@ -120,6 +129,9 @@ void adminPage() {
 }
 
 bool studentLogin(Student* students, int studentCount) {
+
+    system("clear");
+
     string username, password;
     cout << "=====================" << endl;
     cout << "Student Login" << endl;
@@ -138,6 +150,9 @@ bool studentLogin(Student* students, int studentCount) {
 }
 
 void studentPage() {
+
+    system("clear");
+ 
     int studentChoice;
 
     do {
@@ -223,6 +238,7 @@ int main() {
             case 4:
                 break;
             default:
+                system("clear");
                 cout << "Invalid choice. Please try again." << endl;
         }
         cout << endl;
