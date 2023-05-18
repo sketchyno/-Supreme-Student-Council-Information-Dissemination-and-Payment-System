@@ -21,7 +21,7 @@ void pressEnterToContinue() {
 }
 
 void studentRegister(Student* students, int& studentCount) {
-    if (studentCount >= maxStudCout) {
+    if (studentCount >= maxStudcout) {
         cout << "Maximum number of students reached. Please refer to the admin" << endl;
         pressEnterToContinue();
         return;
