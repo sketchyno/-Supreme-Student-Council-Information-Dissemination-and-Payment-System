@@ -4,6 +4,94 @@
 using namespace std;
 
 const int maxStudcout = 1000;  // Maximum number of students
+const int maxAnnounce = 100;   // Maximum Announcement 
+  
+ string TitleAdd[maxAnnounce] = {};
+ string ContentAdd[maxAnnounce] = {};
+
+void addAnnouncement() {
+     
+     system("clear");
+     char title[100];
+     char content[100];
+     int announcement;
+    
+     cin.ignore();
+    
+     cout << "Enter Title: ";
+     cin.getline(title, 100);
+     cout << "Enter Content: ";
+     cin.getline(content, 100);
+     
+    for (int i = 0; i < maxAnnounce; i++)
+    {
+        if (TitleAdd[i] == "\0")
+        {
+            TitleAdd[i] = title;
+            ContentAdd[i] = content;
+            
+            break;
+        }
+    }
+    
+     
+}
+
+void updateAnnouncement (string search) {
+
+         
+        system("clear");
+        
+        char title[100];
+        char content[100];
+        
+        int update = 0;
+        
+        for (int i = 0; i < maxAnnounce; i++)
+        {
+            if(TitleAdd[i] == search)
+            {
+                update ++;
+            
+                cout << "Title content: ";
+                cin.getline(content, 100);
+            
+                ContentAdd[i] = content;
+            
+                cout << "Content Successfully Updated" << endl;
+                break;
+            }
+            if (update == 0)
+            {
+                cout << "No Match Found" << endl;
+            }
+        }
+}
+
+ void deleteAnnouncement(string search) {
+         
+        system("clear");
+        int deleteAnnb = 0;
+
+        for (int i = 0; i < maxAnnounce; i++)
+        {
+            if(TitleAdd[i] == search)
+            {
+            
+                deleteAnn ++;
+                
+                TitleAdd[i] = "";
+                Title content[i] = "";
+               
+                cout << "Announcement Successfully Deleted" << endl;
+            }
+            if (deleteAnn == 0)
+            {
+                cout << "No Match Found" << endl;
+            }
+        }
+ }
+        
 
 struct Student {
     string name;
@@ -104,15 +192,22 @@ void adminPage() {
         switch (adminChoice) {
             case 1:
                 // addAnnouncement();
-                cout << "Add " << endl;
+                addAnnouncement();
                 break;
             case 2:
                 // updateAnnouncement();
-                cout << "Update " << endl;
+                cin.ignore();
+                 cout << "Enter Title: ";
+                 
+                 getline(cin, announceAdmin);
+                 updateAnnouncement(announceAdmin);
                 break;
             case 3:
                 // deleteAnnouncement();
-                cout << "Delete " << endl;
+                cin.ignore();
+                 cout << "Enter Title to Delete: ";
+                 getline(cin, announceAdmin);
+                 deleteAnnouncement(announceAdmin);
                 break;
             case 4:
                 // searchStudentInformation();
@@ -170,7 +265,7 @@ void studentPage() {
         switch (studentChoice) {
             case 1:
                 // viewAnnouncements();
-                cout << "View Announcements" << endl;
+                viewAnnouncement();
                 break;
             case 2:
                 // sscFeePayment();
