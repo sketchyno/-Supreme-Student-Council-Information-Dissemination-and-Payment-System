@@ -71,7 +71,7 @@ void updateAnnouncement (string search) {
  void deleteAnnouncement(string search) {
          
         system("clear");
-        int deleteAnnb = 0;
+        int deleteAnn = 0;
 
         for (int i = 0; i < maxAnnounce; i++)
         {
@@ -81,7 +81,7 @@ void updateAnnouncement (string search) {
                 deleteAnn ++;
                 
                 TitleAdd[i] = "";
-                Title content[i] = "";
+                ContentAdd[i] = "";
                
                 cout << "Announcement Successfully Deleted" << endl;
             }
