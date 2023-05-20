@@ -13,6 +13,11 @@ public:
     string program;
     string sectionBlock;
     string password;
+    bool isPaid;
+
+    Student() {
+        isPaid = false;
+    }
 };
 
 class Announcement {
@@ -27,6 +32,7 @@ private:
     int studentCount;
     Announcement announcements[maxAnnounce];
     int announcementCount;
+    int currentStudentIndex;
 
 public:
     SSCSystem() {
@@ -187,6 +193,11 @@ public:
                 cout << "SR Code: " << students[i].srCode << endl;
                 cout << "Program: " << students[i].program << endl;
                 cout << "Section/Block: " << students[i].sectionBlock << endl;
+                if (students[i].isPaid) {
+                    cout << "Payment Status: Paid" << endl;
+                } else {
+                    cout << "Payment Status: Unpaid" << endl;
+                }
                 pressEnterToContinue();
                 return;
             }
@@ -229,6 +240,25 @@ public:
         cout << "~~ Student Successfully Registered ~~" << endl;
         cout << "Please Click Enter To Exit" << endl;
         cout << "===============================" << endl;
+        pressEnterToContinue();
+    }
+
+    void payFee(Student& student) {
+        double cashAmount;
+        cout << "SSC Fee Payment" << endl;
+        cout << "SSC Fee: PHP 150.00" << endl;
+        cout << "Enter Cash Amount: ";
+        cin >> cashAmount;
+
+        if (cashAmount >= 150) {
+            double change = cashAmount - 150;
+            cout << change << change << endl;
+            cout << "Payment successful!  ";
+            student.isPaid = true;
+        } else {
+            cout << "Insufficient cash. Payment unsuccessful." << endl;
+        }
+
         pressEnterToContinue();
     }
 
@@ -299,7 +329,7 @@ public:
                     viewAnnouncement();
                     break;
                 case 2:
-                    cout << "SSC Fee Payment" << endl;
+                    payFee(students[currentStudentIndex]);
                     break;
                 case 3:
                     break;
@@ -343,7 +373,7 @@ public:
                     if (adminLogin()) {
                         adminPage();
                     } else {
-                        cout << "Invalid username or password. Please try again." << endl;
+                        cout << "Admin login unsuccessful." << endl;
                         pressEnterToContinue();
                     }
                     break;
@@ -351,7 +381,7 @@ public:
                     if (studentLogin()) {
                         studentPage();
                     } else {
-                        cout << "Invalid username or password. Please try again." << endl;
+                        cout << "Student login unsuccessful." << endl;
                         pressEnterToContinue();
                     }
                     break;
@@ -359,9 +389,9 @@ public:
                     studentRegister();
                     break;
                 case 4:
+                    cout << "Thank you for using the SSC Information System. Goodbye!" << endl;
                     break;
                 default:
-                    system("clear");
                     cout << "Invalid choice. Please try again." << endl;
             }
 
@@ -371,7 +401,7 @@ public:
 };
 
 int main() {
-    SSCSystem system;
-    system.run();
-
+    SSCSystem ssc;
+    ssc.run();
+    return 0;
 }
