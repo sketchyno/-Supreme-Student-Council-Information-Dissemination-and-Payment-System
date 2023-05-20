@@ -406,14 +406,24 @@ public:
         int mainChoice;
 
         do {
-            cout << "===============================" << endl;
-            cout << "         Welcome to SSC        " << endl;
-            cout << "===============================" << endl;
+            cout << "================================" << endl;
+            cout << "Supreme Student Council" << endl;
+            cout << "Information Dissemination and Payment System" << endl;
+            cout << "================================" << endl;
+            cout << endl;
+            cout << "By" << endl;
+            cout << endl;
+            cout << "Mendoza, Janelle P." << endl;
+            cout << "Pentinio, Mhark Anthony O." << endl;
+            cout << "Saludaga, Gilbert L." << endl;
+            pressEnterToContinue();
+
+            cout << "=====================" << endl;
             cout << "1. Admin Login" << endl;
             cout << "2. Student Login" << endl;
-            cout << "3. Register Student" << endl;
+            cout << "3. Student Register" << endl;
             cout << "4. Exit" << endl;
-            cout << "===============================" << endl;
+            cout << "=====================" << endl;
             cout << "Enter your choice: ";
             cin >> mainChoice;
             cout << endl;
@@ -422,13 +432,16 @@ public:
                 case 1:
                     if (adminLogin()) {
                         adminPage();
+                    } else {
+                        cout << "Admin login unsuccessful." << endl;
+                        pressEnterToContinue();
                     }
                     break;
                 case 2:
                     if (studentLogin()) {
                         studentPage();
                     } else {
-                        cout << "Invalid username or password. Please try again." << endl;
+                        cout << "Student login unsuccessful." << endl;
                         pressEnterToContinue();
                     }
                     break;
@@ -436,7 +449,8 @@ public:
                     studentRegister();
                     break;
                 case 4:
-                    return;
+                    cout << "Thank you for using the SSC Information System. Goodbye!" << endl;
+                    break;
                 default:
                     cout << "Invalid choice. Please try again." << endl;
             }
