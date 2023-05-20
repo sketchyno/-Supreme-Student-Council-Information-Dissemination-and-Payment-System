@@ -1,98 +1,112 @@
 #include <iostream>
 #include <string>
 
+
+void adminPage();
+void   exitFunc();
+
 using namespace std;
 
 const int maxStudcout = 1000;  // Maximum number of students
 const int maxAnnounce = 100;   // Maximum Announcement 
-  
- string TitleAdd[maxAnnounce] = {};
- string ContentAdd[maxAnnounce] = {};
+
+string TitleAdd[maxAnnounce] = {};
+string ContentAdd[maxAnnounce] = {};
 
 void addAnnouncement() {
-     
-     system("clear");
-     char title[100];
-     char content[100];
-     int announcement;
-    
-     cin.ignore();
-    
-     cout << "Enter Title: ";
-     cin.getline(title, 100);
-     cout << "Enter Content: ";
-     cin.getline(content, 100);
-     
+
+    string title;
+    string content;
+
+    cout << "Enter Title: ";
+    getline(cin, title);
+    cout << "Enter Content: ";
+    getline(cin, content);
+
     for (int i = 0; i < maxAnnounce; i++)
     {
         if (TitleAdd[i] == "\0")
         {
             TitleAdd[i] = title;
             ContentAdd[i] = content;
-            
+
             break;
         }
     }
-    
-     
+    exitFunc();
+
+
 }
 
-void updateAnnouncement (string search) {
+void updateAnnouncement(string search) {
 
-         
-        system("clear");
-        
-        char title[100];
-        char content[100];
-        
-        int update = 0;
-        
-        for (int i = 0; i < maxAnnounce; i++)
+
+    system("clear");
+
+    string title;
+    string content;
+    int update = 0;
+
+    for (int i = 0; i < maxAnnounce; i++)
+    {
+        if (TitleAdd[i] == search)
         {
-            if(TitleAdd[i] == search)
-            {
-                update ++;
-            
-                cout << "Title content: ";
-                cin.getline(content, 100);
-            
-                ContentAdd[i] = content;
-            
-                cout << "Content Successfully Updated" << endl;
-                break;
-            }
-            if (update == 0)
-            {
-                cout << "No Match Found" << endl;
-            }
+            update++;
+
+            cout << "Title content: ";
+            getline(cin, content);
+
+            ContentAdd[i] = content;
+
+            cout << "Content Successfully Updated" << endl;
+            break;
         }
+        if (update == 0)
+        {
+            cout << "No Match Found" << endl;
+        }
+    }
+
 }
 
- void deleteAnnouncement(string search) {
-         
-        system("clear");
-        int deleteAnn = 0;
+void deleteAnnouncement(string search) {
 
-        for (int i = 0; i < maxAnnounce; i++)
+    system("clear");
+    int deleteAnn = 0;
+
+    for (int i = 0; i < maxAnnounce; i++)
+    {
+        if (TitleAdd[i] == search)
         {
-            if(TitleAdd[i] == search)
-            {
-            
-                deleteAnn ++;
-                
-                TitleAdd[i] = "";
-                ContentAdd[i] = "";
-               
-                cout << "Announcement Successfully Deleted" << endl;
-            }
-            if (deleteAnn == 0)
-            {
-                cout << "No Match Found" << endl;
-            }
-        }
- }
-        
 
+            deleteAnn++;
+
+            TitleAdd[i] = "";
+            ContentAdd[i] = "";
+
+            cout << "Announcement Successfully Deleted" << endl;
+        }
+        if (deleteAnn == 0)
+        {
+            cout << "No Match Found" << endl;
+        }
+    }
+    exitFunc();
+}
+
+void exitFunc() {
+    string adminChoice;
+    cout << "Enter (E/e) to exit: ";
+    cin >> adminChoice;
+
+    if (adminChoice == "e" && adminChoice == "E") {
+        adminPage();
+    }
+    else {
+        return;
+
+    }
+}
 struct Student {
     string name;
     string srCode;
@@ -107,9 +121,36 @@ void pressEnterToContinue() {
     cin.get();
     system("clear");
 }
+void viewAnnouncement() {
+    system("clear");
+    bool haveAnnouncement = false;
+    cout << "---------------------------" << endl;
+    cout << "     VIEW ANNOUNCEMENTS    " << endl;
+    cout << "---------------------------" << endl;
 
+    for (int i = 0; i < maxAnnounce; i++) {
+        if (TitleAdd[i] != "" && ContentAdd[i] != "")
+        {
+            haveAnnouncement = true;
+            cout << "---------------------------" << endl;
+            cout << "Title: " << ContentAdd[i] << endl;
+
+            cout << "Content: " << ContentAdd[i] << endl;
+
+            cout << "---------------------------" << endl;
+        }
+    }
+
+    if (!haveAnnouncement) {
+        cout << "No announcements found." << endl;
+    }
+    exitFunc();
+
+
+
+};
 void studentRegister(Student* students, int& studentCount) {
-    
+
     system("clear");
 
     if (studentCount >= maxStudcout) {
@@ -145,15 +186,15 @@ void studentRegister(Student* students, int& studentCount) {
 }
 
 bool adminLogin() {
-    
+
     system("clear");
 
     string username, password;
     string defaultUsername = "sscadmin";
-    string defaultPassword = "adminpassword";
+    string defaultPassword = "test";
 
     cout << "Admin Login" << endl;
-    
+
     do {
         cout << "Enter Username: ";
         cin >> username;
@@ -163,15 +204,21 @@ bool adminLogin() {
 
         if (username == defaultUsername && password == defaultPassword) {
             return true;
-        } else {
+        }
+        else {
             cout << "Invalid username or password. Please try again." << endl;
         }
     } while (true);
+
 }
 
+void searchStudentInformation() {
+
+};
 void adminPage() {
 
     system("clear");
+    string announceAdmin;
 
     int adminChoice;
 
@@ -182,44 +229,50 @@ void adminPage() {
         cout << "1. Add Announcement" << endl;
         cout << "2. Update Announcement" << endl;
         cout << "3. Delete Announcement" << endl;
-        cout << "4. Search Student Information" << endl;
-        cout << "5. Log Out" << endl;
+        cout << "4. View Announcement" << endl;
+        cout << "5. Search Student Information" << endl;
+        cout << "6. Log Out" << endl;
         cout << "=====================" << endl;
         cout << "Enter your choice: ";
         cin >> adminChoice;
         cout << endl;
+        cin.ignore();
 
         switch (adminChoice) {
-            case 1:
-                // addAnnouncement();
-                addAnnouncement();
-                break;
-            case 2:
-                // updateAnnouncement();
-                cin.ignore();
-                 cout << "Enter Title: ";
-                 
-                 getline(cin, announceAdmin);
-                 updateAnnouncement(announceAdmin);
-                break;
-            case 3:
-                // deleteAnnouncement();
-                cin.ignore();
-                 cout << "Enter Title to Delete: ";
-                 getline(cin, announceAdmin);
-                 deleteAnnouncement(announceAdmin);
-                break;
-            case 4:
-                // searchStudentInformation();
-                cout << "Search" << endl;
-                break;
-            case 5:
-                break;
-            default:
-                cout << "Invalid choice. Please try again." << endl;
+        case 1:
+
+            addAnnouncement();
+            break;
+        case 2:
+
+            cin.ignore();
+            cout << "Enter Title: ";
+            getline(cin, announceAdmin);
+            updateAnnouncement(announceAdmin);
+            break;
+        case 3:
+
+            cin.ignore();
+            cout << "Enter Title to Delete: ";
+            getline(cin, announceAdmin);
+            deleteAnnouncement(announceAdmin);
+            break;
+        case 4:
+            viewAnnouncement();
+            break;
+        case 5:
+            searchStudentInformation();
+            break;
+
+        case 6:
+            return;
+            break;
+
+        default:
+            cout << "Invalid choice. Please try again." << endl;
         }
         cout << endl;
-        system("clear"); 
+        system("clear");
     } while (adminChoice != 5);
 }
 
@@ -247,7 +300,7 @@ bool studentLogin(Student* students, int studentCount) {
 void studentPage() {
 
     system("clear");
- 
+
     int studentChoice;
 
     do {
@@ -263,27 +316,28 @@ void studentPage() {
         cout << endl;
 
         switch (studentChoice) {
-            case 1:
-                // viewAnnouncements();
-                viewAnnouncement();
-                break;
-            case 2:
-                // sscFeePayment();
-                cout << "SSC Fee Payment" << endl;
-                break;
-            case 3:
-                break;
-            default:
-                cout << "Invalid choice. Please try again." << endl;
+        case 1:
+
+            viewAnnouncement();
+            break;
+        case 2:
+            // sscFeePayment();
+            cout << "SSC Fee Payment" << endl;
+            break;
+        case 3:
+            break;
+        default:
+            cout << "Invalid choice. Please try again." << endl;
         }
         cout << endl;
-        system("clear"); 
+        system("clear");
     } while (studentChoice != 3);
 }
 
 int main() {
     Student students[maxStudcout];
     int studentCount = 0;
+
 
     int mainChoice;
 
@@ -311,30 +365,32 @@ int main() {
         cout << endl;
 
         switch (mainChoice) {
-            case 1:
-                if (adminLogin()) {
-                    adminPage();
-                } else {
-                    cout << "Invalid username or password. Please try again." << endl;
-                    pressEnterToContinue();
-                }
-                break;
-            case 2:
-                if (studentLogin(students, studentCount)) {
-                    studentPage();
-                } else {
-                    cout << "Invalid username or password. Please try again." << endl;
-                    pressEnterToContinue();
-                }
-                break;
-            case 3:
-                studentRegister(students, studentCount);
-                break;
-            case 4:
-                break;
-            default:
-                system("clear");
-                cout << "Invalid choice. Please try again." << endl;
+        case 1:
+            if (adminLogin()) {
+                adminPage();
+            }
+            else {
+                cout << "Invalid username or password. Please try again." << endl;
+                pressEnterToContinue();
+            }
+            break;
+        case 2:
+            if (studentLogin(students, studentCount)) {
+                studentPage();
+            }
+            else {
+                cout << "Invalid username or password. Please try again." << endl;
+                pressEnterToContinue();
+            }
+            break;
+        case 3:
+            studentRegister(students, studentCount);
+            break;
+        case 4:
+            break;
+        default:
+            system("clear");
+            cout << "Invalid choice. Please try again." << endl;
         }
         cout << endl;
         system("clear");
