@@ -1,4 +1,4 @@
- #include <iostream>
+#include <iostream>
 #include <string>
 
 using namespace std;
@@ -43,14 +43,8 @@ public:
         announcementCount = 0;
 
     }
-
-    ~SSCSystem() {
-        delete[] students;
-    }
-
     void studentRegister() {
-        
-        int studentCount = 0;
+
 
         if (studentCount >= maxStudCount) {
             cout << "\t\tMaximum number of students reached. Please refer to the admin" << endl;
@@ -62,39 +56,39 @@ public:
 
         do {
             cin.ignore();
-            cout << "\t\t\t\t  ---------------------------------------------------" << endl;;
-            cout << "\t\t\t\t\t         REGISTER STUDENT          " << endl;
-            cout << "\t\t\t\t  ---------------------------------------------------" << endl;
-            cout << "\t\t\t\t     Enter Name: ";
+            cout << "\t\t\t-----------------------------------------------------------------------" << endl;
+            cout << "\t\t\t\t\t\t\t" << endl;
+            cout << "\t\t\t\t\t\t     Register Student    " << endl;
+            cout << "\t\t\t\t\t\t\t" << endl;
+            cout << "\t\t\t-----------------------------------------------------------------------" << endl;
+            cout << "\t\t\tEnter Name: ";
             getline(cin, newStudent.name);
-            cout << "\t\t\t\t     Enter SR Code (Username): ";
+            cout << "\t\t\tEnter SR Code (Username): ";
             getline(cin, newStudent.srCode);
-            cout << "\t\t\t\t     Enter Program: ";
+            cout << "\t\t\tEnter Program: ";
             getline(cin, newStudent.program);
-            cout << "\t\t\t\t     Enter Section/Block: ";
+            cout << "\t\t\tEnter Section/Block: ";
             getline(cin, newStudent.sectionBlock);
-            cout << "\t\t\t\t     Enter Password: ";
+            cout << "\t\t\tEnter Password: ";
             getline(cin, newStudent.password);
-
+            
             this->students[studentCount] = newStudent;
             studentCount++;
 
-            cout << "\t\t\t\t  ---------------------------------------------------" << endl;
+            cout << "\t\t\t-----------------------------------------------------------------------" << endl;
             cout << endl;
-            cout << "\t\t\t\t            ~ Student Successfully Registered ~" << endl;
-            cout << endl;
-            cout << "\t\t\t\t  ---------------------------------------------------" << endl;
-            cout << "\t\t\t\t   Do you want to register another student? (Y/N): ";
+            cout << "\t\t\t\t\t    ~ Student Successfully Registered ~" << endl;
+            cout << "\t\t\t\t\t       Please Click Enter To Exit" << endl;
+            cout << "\t\t\t-----------------------------------------------------------------------" << endl;
+            cout << "\t\t\t    Do you want to register another student? (Y/N): ";
             char choice;
             cin >> choice;
-           
 
             if (choice != 'Y' && choice != 'y')
                 break;
 
         } while (true);
 
-        pressEnterToExit();
     }
 
     void pressEnterToContinue() {
@@ -297,7 +291,7 @@ public:
         for (int i = 0; i < studentCount; i++) {
             const Student& student = students[i];
             if (!student.isPaid) {
-                cout << "\t\t " << student.name << "-" << student.srCode << endl;
+                cout << "\t\t " << student.name << "-\t\t\t\t    " << student.srCode << endl;
             }
             else {
                 numPaid++;
@@ -364,47 +358,53 @@ public:
             system("clear");
         } while (adminChoice != 7);
     }
-
     void searchStudentInformation() {
-
         string search;
 
         cout << "\t\t\t-----------------------------------------------------------------------" << endl;
         cout << "\t\t\t\t\t\t\t" << endl;
-        cout << "\t\t\t\t\t\tSearch Student Information" << endl;
+        cout << "\t\t\t\t\t\t    SEARCH STUDENT INFORMATION" << endl;
         cout << "\t\t\t\t\t\t\t" << endl;
         cout << "\t\t\t-----------------------------------------------------------------------" << endl;
         cout << "\t\t\t\t\t\t\t" << endl;
         cout << "\t\t\t\t\t\t\t" << endl;
-        cout << "\t\t\tPress ENTER to proceed searching student info...  ";
+        cout << "\t\t\tPress ENTER to proceed searching content...  ";
+
+        bool found = false;
 
         do {
             cin.ignore();
             cout << "\t\t\tEnter SR Code to Search: ";
             getline(cin, search);
-            cout << "\t\t\t\t\t\t\t" << endl;
+
             for (int i = 0; i < studentCount; i++) {
                 if (students[i].srCode == search) {
                     cout << "\t\t\tName: " << students[i].name << endl;
                     cout << "\t\t\tSR Code: " << students[i].srCode << endl;
                     cout << "\t\t\tProgram: " << students[i].program << endl;
                     cout << "\t\t\tSection/Block: " << students[i].sectionBlock << endl;
-
-                    cout << "\t\t\t\t\t\t\t" << endl;
+                    
                     if (students[i].isPaid) {
-                        cout << "\t\tPayment Status: Paid" << endl;
+                        cout << "\t\t\t\t\t\t\t" << endl;
+                        cout << "\t\t\tPayment Status: Paid" << endl;
                     }
                     else {
-                        cout << "\t\tPayment Status: Unpaid" << endl;
+                        cout << "\t\t\tPayment Status: Unpaid" << endl;
                     }
+                    found = true;
                     break;
                 }
             }
 
-            cout << "\t\t\t\t                 No matching student found." << endl;
-            cout << "\t\t\t-----------------------------------------------------------------------" << endl;
 
-            cout << "\t\t\t\tDo you want to search for another student? (Y/N): ";
+            
+
+            cout << "\t\t\t-----------------------------------------------------------------------" << endl;
+            
+            if (found == false) {
+                cout << "\t\t\t\t\t            No matching found." << endl;
+            }
+            cout << "\t\t\t\t    Do you want to search another student? (Y/N): ";
             char choice;
             cin >> choice;
             cout << "\t\t\t-----------------------------------------------------------------------" << endl;
@@ -416,7 +416,6 @@ public:
 
         return;
     }
-
     
 
     void payFee(Student& student) {
@@ -658,4 +657,3 @@ int main() {
     ssc.run();
     return 0;
 }
-
